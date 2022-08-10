@@ -165,3 +165,56 @@ int main() {
 }
 ```
 ## 2진수 -> 8진수 [백준 1373번](https://www.acmicpc.net/problem/1373)
+
+## 소수
+
+## 골드바흐의 추측
+
+### 소스 코드
+```cpp
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#define BIGNUM 10001
+
+using namespace std;
+
+int x;
+int prime[5001], pn;
+bool num[BIGNUM] = {false, };
+
+int nearIndex(int a) {
+    int idx, tmp, min = 10001;
+    for (int i = 0; i < pn; i++) {
+        tmp = prime[i] - a;
+        if (abs(min) > abs(tmp)) {
+            min = tmp;
+            idx = i;
+        }
+    }
+    return idx;
+}
+
+int main() {
+    num[1] = true;
+    int N; cin >> N;
+    for (int i = 2; i <= BIGNUM; i++) {
+        if (num[i] == false) {
+            prime[pn++] = i;
+            for (int j = i * i; j <= BIGNUM; j += i) {
+                num[j] = true; 
+            }
+        }
+    }
+    for (int i = 0; i < N; i++) {
+        cin >> x;
+        for (int j = nearIndex(x/2); j >= 0; j--) {
+            if (num[x-prime[j]] == false) {
+                cout << prime[j] << " " << x-prime[j] << "\n";
+                break;
+            }
+        }
+    }
+}
+```
