@@ -32,3 +32,41 @@ int main() {
 }
 
 ```
+
+# 가로수 [백준 2485번](https://www.acmicpc.net/problem/2485)
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> tree;
+
+int gcd(int a, int b) {
+    if (a == 0) return b;
+    else if (b == 0) return a;
+    else {
+        if (a > b) {
+            return gcd(b, a % b);
+        }
+        else {
+            return gcd(a, b % a);
+        }
+    }
+}
+
+int N, x;
+
+int main() {
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        cin >> x;
+        tree.push_back(x);
+    }
+    int G = tree[1] - tree[0];
+    for (int i = 1; i < N-1; i++) {
+        G = gcd(tree[i+1] - tree[i], G);
+    }
+    cout << ((tree[N-1] - tree[0]) / G) - (tree.size() - 1);
+}
+```
