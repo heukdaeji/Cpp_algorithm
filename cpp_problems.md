@@ -20,11 +20,14 @@ int main() {
     cin >> p >> q;
     cin >> t;
     if (p+t <= w) ansx = p+t;
-    else if ((t-(2*w-p)) % 2*w <= w) ansx = (t-(2*w-p)) % (2*w);
-    else ansx = w - ((t-(2*w-p)) % (2*w));
+    else if (w < (p+t) && p+t <= 2*w) ansx = 2*w-p-t;
+    else if ((t-(2*w-p)) % (2*w) <= w) ansx = (t-(2*w-p)) % (2*w);
+    else ansx = 2*w - ((t-(2*w-p)) % (2*w));
     if (q+t <= h) ansy = q+t;
-    if ((t-(2*h-q)) % 2*h <= h) ansy = t-(2*h-q) % (2*h);
-    else ansy = h - ((t-(2*h-q)) % (2*h));
+    else if (h < q+t && q+t < 2*h) ansy = 2*h-q-t;
+    else if ((t-(2*h-q)) % (2*h) <= h) ansy = (t-(2*h-q)) % (2*h);
+    else ansy = 2*h - ((t-(2*h-q)) % (2*h));
     cout << ansx << " " << ansy;
 }
+
 ```
