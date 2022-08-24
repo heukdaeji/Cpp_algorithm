@@ -122,3 +122,41 @@ int main() {
     cout << diff;
 }
 ```
+* 시간 초과가 남.
+<br>
+* 고친 코드:
+```cpp
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+pair<int, int> student[1000001];
+int cnt[1000*1000];
+int n, m, stn = 0;
+int main() {
+    cin >> n >> m;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> student[stn].first;
+            student[stn++].second = i;
+        }
+    }
+    
+    sort(student, student+n*m);
+    int num = 0, s = 0, e = 0;
+    int ans = 1234567890;
+    while (e < n*m) {
+        if (cnt[student[e].second] == 0) num++;
+        cnt[student[e].second]++;
+        while (num == n) {
+            ans = min(ans, student[e].first - student[s].first);
+            cnt[student[s].second]--;
+            if (cnt[student[s].second] == 0) num--;
+            s++;
+        }
+        e++;
+    }
+    cout << ans;
+}
+```
