@@ -70,3 +70,55 @@ int main() {
     cout << ((tree[N-1] - tree[0]) / G) - (tree.size() - 1);
 }
 ```
+
+# 대표 선수
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+pair<int, int> st[1000001];
+int N, M, stn = 0;
+int diff = 100000001;
+int curnum[1000];
+
+bool cmp(pair<int, int> a, pair<int, int> b) {
+    return a.first < b.first;
+}
+
+int main() {
+    cin >> N >> M;
+    for (int i = 0; i < N; i++) {
+        curnum[i] = -1;
+    }
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            cin >> st[stn].first;
+            st[stn++].second = i;
+        }
+    }
+    sort(st, st+stn, cmp);
+    for (int i = 0; i < N*M; i++) {
+        curnum[st[i].second] = st[i].first;
+        for (int j = 0; j < N; j++) {
+            if (curnum[j] == -1) {
+                break;
+            }
+            if (j == N-1) {
+                int maxele = -1, minele = 100000000;
+                for (int k = 0; k < N; k++) {
+                    if (curnum[k] < minele) {
+                        minele = curnum[k];
+                    }
+                    if (curnum[k] > maxele) {
+                        maxele = curnum[k];
+                    }   
+                }
+                diff = (diff > (maxele - minele)) ? (maxele - minele) : diff;
+            }
+        }
+    }
+    cout << diff;
+}
+```
