@@ -123,7 +123,7 @@ int main() {
 }
 ```
 * 시간 초과가 남.
-<br>
+
 * 고친 코드:
 ```cpp
 #include <iostream>
