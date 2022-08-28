@@ -1,7 +1,7 @@
 # 1번. 사진작가
 
 * 투 포인터를 이용하면 쉽게 해결할 수 있다.
-* ```cpp
+```cpp
 #include <iostream>
 
 using namespace std;
@@ -38,7 +38,8 @@ int main() {
 		e++;
 	}
 	cout << ans;
-}```
+}
+```
 
 # 4번. 물고기 양식장
 
