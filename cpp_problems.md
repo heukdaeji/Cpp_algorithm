@@ -1,3 +1,43 @@
+# 연결 요소의 개수
+
+```cpp
+#include <iostream>
+#include <vector>
+#define BNUM 1001
+
+using namespace std;
+
+int N, M, from, to, ans;
+vector<int> nd[BNUM*(BNUM-1)/2];
+int check[1002];
+
+void dfs(int n) {
+    check[n] = true;
+    
+    for (int i = 0; i < nd[n].size(); i++) {
+        int next = nd[n][i];
+        if (check[next] == false) {
+            dfs(next);
+        }
+    }
+}
+
+int main() {
+    cin >> N >> M;
+    for (int i = 0; i < M; i++) {
+        cin >> from >> to;
+        nd[from].push_back(to);
+    }
+    for (int i = 1; i <= N; i++) {
+        if (!check[i]) {
+            ans++;
+            dfs(i);
+        }
+    }
+    cout << ans;
+}
+```
+
 # 개미 [백준 10158번](https://www.acmicpc.net/problem/10158)
 
 ## 문제 접근
