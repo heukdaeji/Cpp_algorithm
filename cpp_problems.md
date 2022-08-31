@@ -17,17 +17,17 @@ bool check[26][26];
 int dfs(int x, int y, int n) {
     n++;
     check[x][y] = true;
-    if (!check[x-1][y-1] && (x > 0) && (y > 0) && nd[x-1][y-1]) {
-        n += dfs(x-1, y-1, n);
+    if (!check[x][y-1] && (y > 0) && nd[x][y-1]) {
+        n += dfs(x, y-1, 0);
     }
-    if (!check[x-1][y+1] && (x > 0) && (y < N-1) && nd[x-1][y+1]) {
-        n += dfs(x-1, y+1, n);
+    if (!check[x][y+1] && (y < N-1) && nd[x][y+1]) {
+        n += dfs(x, y+1, 0);
     }
-    if (!check[x+1][y+1] && (x < N-1) && (y < N-1) && nd[x+1][y+1]) {
-        n += dfs(x+1, y+1, n);
+    if (!check[x+1][y] && (x < N-1) && nd[x+1][y]) {
+        n += dfs(x+1, y, 0);
     }
-    if (!check[x+1][y-1] && (x < N-1) && (y > 0) && nd[x+1][y-1]) {
-        n += dfs(x+1, y-1, n);
+    if (!check[x-1][y] && (x > 0) && nd[x-1][y]) {
+        n += dfs(x-1, y, 0);
     }
     return n;
 }
@@ -49,10 +49,12 @@ int main() {
         }
     }
     cout << ans << "\n";
+    sort(sums.begin(), sums.end());
     for (int i = 0; i < sums.size(); i++) {
         cout << sums[i] << "\n";
     }
 }
+
 ```
 
 # 연결 요소의 개수
