@@ -1,3 +1,60 @@
+# 단지 번호 붙이기
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#define BNUM 1001
+
+using namespace std;
+
+int N, a, ans = 0;
+vector<int> sums;
+char str;
+int nd[26][26];
+bool check[26][26];
+
+int dfs(int x, int y, int n) {
+    n++;
+    check[x][y] = true;
+    if (!check[x-1][y-1] && (x > 0) && (y > 0) && nd[x-1][y-1]) {
+        n += dfs(x-1, y-1, n);
+    }
+    if (!check[x-1][y+1] && (x > 0) && (y < N-1) && nd[x-1][y+1]) {
+        n += dfs(x-1, y+1, n);
+    }
+    if (!check[x+1][y+1] && (x < N-1) && (y < N-1) && nd[x+1][y+1]) {
+        n += dfs(x+1, y+1, n);
+    }
+    if (!check[x+1][y-1] && (x < N-1) && (y > 0) && nd[x+1][y-1]) {
+        n += dfs(x+1, y-1, n);
+    }
+    return n;
+}
+
+int main() {
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> str;
+            if (str == '1') nd[i][j] = 1;
+        }
+    }
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (!check[i][j] && nd[i][j]) {
+                sums.push_back(dfs(i, j, 0));
+                ans++;
+            }
+        }
+    }
+    cout << ans << "\n";
+    for (int i = 0; i < sums.size(); i++) {
+        cout << sums[i] << "\n";
+    }
+}
+```
+
 # 연결 요소의 개수
 
 ```cpp
