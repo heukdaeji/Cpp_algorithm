@@ -124,3 +124,72 @@ int main() {
     }
 }
 ```
+
+# 토마토 (백준 7569번)
+* 코드:
+```cpp
+#include <iostream>
+#include <string.h>
+#include <vector>
+
+using namespace std;
+
+int N, M, H;
+typedef struct loc {
+    int x, y, z;
+} L;
+int box[101][101][101];
+bool visiten[101][101][101];
+int dx[6] = {1, -1, 0, 0, 0, 0};
+int dy[6] = {0, 0, 1, -1, 0, 0};
+int dz[6] = {0, 0, 0, 0, 1, -1};
+vector<L> tempbox;
+
+
+void dfs(int x, int y, int z) {
+    visiten[x][y][z] = true;
+    for (int l = 0; l < 6; l++) {
+        int cx = x + dx[l], cy = y + dy[l], cz = z + dz[l];
+        if (0 > cx || cx >= H || 0 > cy || cy >= N || 0 > cz || cz >= M) continue;
+        if (box[cx][cy][cz] == 0 && visiten[cx][cy][cz] == false) {
+            tempbox.insert(0, {cx, cy, cz});
+        }
+    }
+}
+
+int main() {
+    cin >> M >> N >> H;
+    for (int i = 0; i < H; i++) {
+        for (int j = 0; j < N; j++) {
+            for (int k = 0; k < M; k++) {
+                cin >> box[i][j][k];
+            }
+        }
+    }
+    int T = 0;
+    while (true) {
+        bool dfsed = false;
+        for (int i = 0; i < tempbox.size(); i++) {
+            dfs(tempbox[i].x, tempbox[i].y, tempbox[i].z);
+            box[tempbox[i].x][tempbox[i].y][tempbox[i].z] = 1;
+            tempbox.pop_back();
+            dfsed = true;
+        }
+        if (!dfsed) {
+            for (int i = 0; i < H; i++) {
+                for (int j = 0; j < N; j++) {
+                    for (int k = 0; k < M; k++) {
+                        if (box[i][j][k] == 0) {
+                            cout << -1;
+                            return 0;
+                        }
+                    }
+                }
+            }
+            cout << T-1;
+            return 0;
+        }
+        T++;
+    }
+}
+```
