@@ -84,3 +84,43 @@ int main() {
   cout << ans;
 }
 ```
+
+# 순열 사이클 (백준 10451번)
+
+* 소스코드:
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int T;
+bool visiten[1001];
+int arr[1001];
+
+void dfs(int x)  {
+    visiten[x] = true;
+    if (!visiten[arr[x]]) dfs(arr[x]);
+    return;
+}
+
+int main() {
+    cin >> T;
+    while (T--) {
+        int ans = 0, N;
+        cin >> N;
+        for (int i = 1; i <= N; i++) {
+            cin >> arr[i];
+        }
+        for (int i = 1; i <= N; i++) {
+            if (!visiten[i]) {
+                dfs(i);
+                ans++;
+            }
+        }
+        cout << ans << "\n";
+        for (int i = 1; i <= N; i++) {
+            visiten[i] = false;
+        }
+    }
+}
+```
