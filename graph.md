@@ -209,3 +209,32 @@ int main() {
     }
 }
 ```
+
+# 경로 찾기 (백준 2479번)
+코드:
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int N, K;
+vector<string> bin;
+
+void findHaming(string a, string b) 
+
+void bfs(int )
+
+int main() {
+    cin >> N >> K;
+    int b;
+    for (int i = 0; i < N; i++) {
+        cin >> b;
+        bin.push_back(b);
+    }
+    string A, B;
+    cin >> A >> B;
+    
+}
+```
