@@ -131,6 +131,7 @@ int main() {
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -143,16 +144,20 @@ bool visiten[101][101][101];
 int dx[6] = {1, -1, 0, 0, 0, 0};
 int dy[6] = {0, 0, 1, -1, 0, 0};
 int dz[6] = {0, 0, 0, 0, 1, -1};
-vector<L> tempbox;
+//vector<L> tempbox;
+queue<L> tempbox;
 
-
+// box[높이: H = x][가로: M = y][세로: N = z]
 void dfs(int x, int y, int z) {
-    visiten[x][y][z] = true;
     for (int l = 0; l < 6; l++) {
         int cx = x + dx[l], cy = y + dy[l], cz = z + dz[l];
         if (0 > cx || cx >= H || 0 > cy || cy >= N || 0 > cz || cz >= M) continue;
         if (box[cx][cy][cz] == 0 && visiten[cx][cy][cz] == false) {
-            tempbox.insert(0, {cx, cy, cz});
+            //cout << "ㄴ" << cx << " " << cy << " " << cz << "\n";
+            visiten[cx][cy][cz] = true;
+            L locs;
+            locs.x = cx; locs.y = cy; locs.z = cz;
+            tempbox.push(locs);
         }
     }
 }
@@ -163,16 +168,26 @@ int main() {
         for (int j = 0; j < N; j++) {
             for (int k = 0; k < M; k++) {
                 cin >> box[i][j][k];
+                if (box[i][j][k] == 1) {
+                    visiten[i][j][k] = true;
+                    L locs;
+                    locs.x = i; locs.y = j; locs.z = k;
+                    tempbox.push(locs);
+                }
             }
         }
     }
     int T = 0;
     while (true) {
         bool dfsed = false;
-        for (int i = 0; i < tempbox.size(); i++) {
-            dfs(tempbox[i].x, tempbox[i].y, tempbox[i].z);
-            box[tempbox[i].x][tempbox[i].y][tempbox[i].z] = 1;
-            tempbox.pop_back();
+        int bsize = tempbox.size();
+        //cout << "\n";
+        //cout << T  << "\n";
+        for (int i = 0; i < bsize; i++) {
+            //cout << tempbox.front().x << " " << tempbox.front().y << " " << tempbox.front().z << "\n";
+            dfs(tempbox.front().x, tempbox.front().y, tempbox.front().z);
+            box[tempbox.front().x][tempbox.front().y][tempbox.front().z] = 1;
+            tempbox.pop();
             dfsed = true;
         }
         if (!dfsed) {
@@ -180,6 +195,7 @@ int main() {
                 for (int j = 0; j < N; j++) {
                     for (int k = 0; k < M; k++) {
                         if (box[i][j][k] == 0) {
+                            //cout << i << " " << j << " " << k << "\n";
                             cout << -1;
                             return 0;
                         }
