@@ -58,3 +58,43 @@ int main() {
     cout << nums[0] << "\n" << nums[nums.size()-1];
 }
 ```
+
+# 1074번 Z
+* 코드:
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+int N, r, c;
+
+void BiBinarySearch(int StartX, int StartY, int len, int num) {
+    if (len == 2) {
+        for (int i = 0; i < 4; i++) {
+            int ylen = (i < 2) ? StartY : (StartY + 1);
+            int xlen = (i % 2 == 0) ? StartX : (StartX + 1);
+            if (ylen == c && xlen == r) {
+                cout << num+i;
+                exit(0);
+            }
+        }
+    }
+    else {
+        for (int i = 0; i < 4; i++) {
+            int ylen = (i < 2) ? StartY : (StartY + len/2);
+            int xlen = (i % 2 == 0) ? StartX : (StartX + len/2);
+            BiBinarySearch(ylen, xlen, len/2, len*i+num);
+        }
+    }
+    cout << num << ", end" << len << "\n";
+}
+
+
+
+int main() {
+    cin >> N >> r >> c;
+    BiBinarySearch(0, 0, pow(2, N), 0);
+}
+```
