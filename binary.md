@@ -164,3 +164,36 @@ int main() {
     printf("%d\n%d\n%d\n", Tneg, Tany, Tpos);
 }
 ```
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int N, K, lan[10001];
+
+int main() {
+    int right = 0;
+    cin >> N >> K;
+    for (int i = 0; i < N; i++) {
+        cin >> lan[i];
+        right += lan[i];
+    }
+    int left = 1;
+    int mid;
+    while (left < right) {
+        mid = (left + right) / 2;
+        int s = 0;
+        for (int j = 0; j < N; j++) {
+            s += (lan[j] / mid);
+        }
+        cout << s << " " << mid << "\n";
+        if (s < K) {
+            right = mid-1;
+        } else {
+            left = mid;
+        }
+    }
+    printf("%d %d %d", left, mid, right);
+}
+```
