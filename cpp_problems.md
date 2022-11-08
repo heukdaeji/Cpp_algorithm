@@ -259,3 +259,40 @@ int main() {
     cout << ans;
 }
 ```
+# 저울
+* 소스코드:
+```cpp#include <iostream>
+
+using namespace std;
+
+bool Gotten[101][101];
+
+int N, M;
+
+int main() {
+    int a, b;
+    cin >> N >> M;
+    for (int i = 0; i < M; i++) {
+        cin >> a >> b;
+        Gotten[a][b] = true;
+    }
+    for (int k = 1; k <= N; k++) {
+        for (int i = 1; i <= N; i++) {
+            if (!Gotten[i][k]) continue;
+            for (int j = 1; j <= N; j++) {
+                if (Gotten[k][j]) {
+                    Gotten[i][j] = true;
+                }
+            }
+        }
+    }
+    for (int i = 1; i <= N; i++) {
+        int x = 0;
+        for (int j = 1; j <= N; j++) {
+            if (i != j && !Gotten[i][j] && !Gotten[j][i]) x++;
+        }
+        cout << x << "\n";
+    }
+    
+}
+```
