@@ -98,3 +98,46 @@ int main() {
     BiBinarySearch(0, 0, pow(2, N), 0);
 }
 ```
+
+* 비밀번호 (백준 2464번)
+* 소스 코드:
+
+```cpp
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+
+using namespace std;
+
+int a[64], b[64], a_n = 0;
+long long A, smallA, bigA;
+int prev = 0, next = 0;
+
+int TwoToTen() {
+    for (int i = 0; i < 63; i++) {
+        
+    }
+}
+
+int main() {
+    cin >> A;
+    long long x;
+    while (A > 0) {
+        x = A % 2;
+        A /= 2;
+        a[a_n] = x;
+        a_n++;
+    }
+    for (int i = 0; i < a_n; i++) {
+        b[a_n-1-i] = a[i];
+    }
+    for (int i = 0; i < a_n; i++) {
+        cout << b[i];
+    }
+    prev_permutation(b, b+a_n-1);
+    
+    next_permutation(b, b+a_n-1);
+    next_permutation(b, b+a_n-1);
+    cout << prev << " " << next;
+}
+```
