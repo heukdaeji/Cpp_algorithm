@@ -1,3 +1,49 @@
+# 직각다각형 (백준 17611번)
+```cpp
+#include <iostream>
+#include <algorithm>
+#define PLUS 500000
+using namespace std;
+int xl[1000001] = {0, }; // xl[i]: i-MINUS ~ i+1-MINUS 까지 교차점 갯수
+int yl[1000001] = {0, }; // yl[i]: i-MINUS ~ i+1-MINUS 까지 교차점 갯수
+
+
+int main() {
+    int N;
+    cin >> N;
+    int x, y, lx, ly;
+    cin >> x >> y;
+    int minx = x, maxx = x, miny = y, maxy = y;
+    for (int i = 0; i < N-1; i++) {
+        lx = x;
+        ly = y;
+        cin >> x >> y;
+        minx = min(x, minx), maxx = max(x, maxx), miny = min(y, miny), maxy = max(y, maxy);
+        if (lx == x) {
+            if (y > ly) {
+                for (int j = lx; j < x; j++) {
+                    yl[j+PLUS]++;
+                }
+            } else {
+                for (int j = x-1; j >= lx; j--) {
+                    yl[j+PLUS]++;
+                }
+            }
+        } else {
+            if (x > lx) {
+                for (int j = ly; j < y; j++) {
+                    xl[j+PLUS]++;
+                }
+            } else {
+                for (int j = y-1; j >= ly; j--) {
+                    xl[j+PLUS]++;
+                }
+            }
+        }
+    }
+}
+```
+
 # 단지 번호 붙이기
 
 ```cpp
