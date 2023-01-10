@@ -4,8 +4,8 @@
 #include <algorithm>
 #define PLUS 500000
 using namespace std;
-int xl[1000001] = {0, }; // xl[i]: i-MINUS ~ i+1-MINUS 까지 교차점 갯수
-int yl[1000001] = {0, }; // yl[i]: i-MINUS ~ i+1-MINUS 까지 교차점 갯수
+int xl[1000001] = {0, }; // xl[i]: i-PLUS ~ i+1-PLUS 까지 교차점 갯수
+int yl[1000001] = {0, }; // yl[i]: i-PLUS ~ i+1-PLUS 까지 교차점 갯수
 
 
 int main() {
@@ -13,34 +13,44 @@ int main() {
     cin >> N;
     int x, y, lx, ly;
     cin >> x >> y;
+    int fx = x, fy = y;
     int minx = x, maxx = x, miny = y, maxy = y;
-    for (int i = 0; i < N-1; i++) {
+    for (int i = 0; i < N; i++) {
         lx = x;
         ly = y;
-        cin >> x >> y;
+        if (i == N-1) {x = fx; y = fy;}
+        else cin >> x >> y;
         minx = min(x, minx), maxx = max(x, maxx), miny = min(y, miny), maxy = max(y, maxy);
         if (lx == x) {
             if (y > ly) {
-                for (int j = lx; j < x; j++) {
+                for (int j = ly; j < y; j++) {
                     yl[j+PLUS]++;
                 }
             } else {
-                for (int j = x-1; j >= lx; j--) {
+                for (int j = ly-1; j >= y; j--) {
                     yl[j+PLUS]++;
                 }
             }
         } else {
             if (x > lx) {
-                for (int j = ly; j < y; j++) {
+                for (int j = lx; j < x; j++) {
                     xl[j+PLUS]++;
                 }
             } else {
-                for (int j = y-1; j >= ly; j--) {
+                for (int j = lx-1; j >= x; j--) {
                     xl[j+PLUS]++;
                 }
             }
         }
     }
+    int xs = 0, ys = 0;
+    for (int i = minx; i < maxx; i++) {
+        xs = max(xl[i+PLUS], xs);
+    }
+    for (int i = miny; i < maxy; i++) {
+        ys = max(yl[i+PLUS], ys);
+    }
+    cout << max(xs, ys);
 }
 ```
 
