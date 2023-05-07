@@ -9,5 +9,6 @@
 기본적으로 c++ stl 내장 gui 라이브러리는 없음 \
 gui library: Nana http://nanapro.org/en-us/ \
 turtle library: raylib https://www.raylib.com/index.html \
+[raylib vsc에서 사용하기](https://www.lawwiki.kr/doku.php?id=raylib:raylib_%EB%A5%BC_cpp%EB%A1%9C_vs_code_%EC%97%90%EC%84%9C_%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0) \
 Visual Studio 사용, 되면 vsc에 설치하기 \
 gui로 속도, 질량, 힘, 발사각도 등 선택지 만들고 gui 내 실행 누르면 turtle로 실험 결과 재생
