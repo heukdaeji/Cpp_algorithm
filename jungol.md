@@ -56,4 +56,54 @@ int main() {
     cout << ans;
 }```
 + 2873
-+ 1256
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int X, Y, P, W; // 행, 열, 색종이, 잘못 칸
+int xl, yl, maxx;
+vector<pair<int, int>> a;
+
+bool cmp(pair<int, int> x, pair<int, int> y) {
+    if (x.second == y.second) return x.first < y.first;
+    return x.second < y.second;
+}
+
+bool check(int x) {
+    if (maxx > x) return false;
+    int i = -1, amn = 0;
+    while (i != W) {
+        i++;
+        int j = a[i].second;
+        while ((j+x)>a[i].second && i < W) i++;
+        cout << i << " ";
+        amn++;
+    }
+    cout << x << ": " << amn << "\n";
+    return P >= amn;
+}
+
+int main() {
+    cin >> X >> Y >> P >> W;
+    for (int i = 0; i < W; i++) {
+        cin >> xl >> yl;
+        maxx = max(maxx, xl);
+        a.push_back({xl, yl});
+    }
+    sort(a.begin(), a.end(), cmp);
+    // for (int i = 0; i < a.size(); i++) {
+    //     cout << a[i].first << " " << a[i].second << "\n";
+    // }
+    int start = 1, end = min(X, Y);
+    while (start < end) {
+        int mid = (start+end)/2;
+        if (check(mid)) end = mid;
+        else start = mid+1;
+    }
+    cout << end;
+}```
++ 2539
++ 1561
++ 1637
