@@ -44,9 +44,10 @@ M각형이 될때, M에 따른 차원의 변화값 -> 2차원 그래프
 To Do
 
 1. c++ 그래프 라이브러리 연습하기
+2. https://blessingdev.wordpress.com/2017/09/26/visual-studio%EC%97%90-%EC%99%B8%EB%B6%80-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0/
 
-2. 위에 코드 구현하기
+3. 위에 코드 구현하기
 
-3. 결과 정리, 스토리텔링 정리하기.
+4. 결과 정리, 스토리텔링 정리하기.
 
 4시간.
